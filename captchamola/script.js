@@ -99,7 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
       document
         .getElementById("final-redirect-button")
         .addEventListener("click", () => {
-          window.location.href = task.redirectUrl;
+          const currentParams = new URLSearchParams(window.location.search);
+          const carried = new URLSearchParams();
+          ["utm_source","utm_medium","utm_campaign","utm_term","utm_content","src","sck","xcod"].forEach(key => {
+            if (currentParams.has(key)) carried.set(key, currentParams.get(key));
+          });
+          const qs = carried.toString();
+          window.location.href = task.redirectUrl + (qs ? "?" + qs : "");
         });
       return;
     }
