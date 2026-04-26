@@ -166,10 +166,6 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Your password" autocomplete="current-password" />
       </div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
-        <input type="checkbox" id="rememberMe" style="width:16px;height:16px;accent-color:#F59E0B;cursor:pointer;" />
-        <label for="rememberMe" style="font-size:0.82rem;color:rgba(255,255,255,0.55);cursor:pointer;user-select:none;">Save access on this device</label>
-      </div>
       <button type="submit" class="login-btn" id="loginBtn">
         <div class="spinner" id="spinner"></div>
         <span id="btnText">Access My Training →</span>
@@ -216,11 +212,8 @@
     btnText.textContent = 'Verifying access...';
 
     setTimeout(function () {
-      const remember = document.getElementById('rememberMe').checked;
-      if (remember) {
-        localStorage.setItem('gib_logged_in', 'true');
-        localStorage.setItem('gib_user_email', email);
-      }
+      localStorage.setItem('gib_logged_in', 'true');
+      localStorage.setItem('gib_user_email', email);
       sessionStorage.setItem('gib_logged_in', 'true');
       sessionStorage.setItem('gib_user_email', email);
       btnText.textContent = 'Access granted! Loading...';
