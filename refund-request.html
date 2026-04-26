@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refund Request — Members Area</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #F9FAFB; color: #1F2937; min-height: 100vh; display: flex; flex-direction: column; }
+
+    .header {
+      background: #0A1628;
+      padding: 0 24px;
+      height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header__logo { font-size: 1.1rem; font-weight: 800; color: #fff; text-decoration: none; }
+    .header__logo em { color: #F59E0B; font-style: normal; }
+    .header__back { color: rgba(255,255,255,0.65); font-size: 0.875rem; text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .header__back:hover { color: #fff; }
+
+    .main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+
+    /* FORM STATE */
+    .card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 40px 36px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .card-icon {
+      width: 56px; height: 56px;
+      background: #FEF3C7;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    h1 { font-size: 1.35rem; font-weight: 800; color: #111827; margin-bottom: 6px; }
+    .subtitle { font-size: 0.88rem; color: #6B7280; margin-bottom: 28px; line-height: 1.6; }
+
+    /* PRODUCT BOX */
+    .product-box {
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .product-info { display: flex; align-items: center; gap: 12px; }
+    .product-icon {
+      width: 40px; height: 40px;
+      background: #0A1628;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .product-name { font-size: 0.95rem; font-weight: 700; color: #111827; }
+    .product-type { font-size: 0.75rem; color: #9CA3AF; margin-top: 1px; }
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    /* FORM */
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 0.83rem; font-weight: 600; color: #374151; margin-bottom: 6px; }
+    select, textarea {
+      width: 100%;
+      border: 1px solid #D1D5DB;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: #111827;
+      background: #fff;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    select:focus, textarea:focus { border-color: #0A1628; box-shadow: 0 0 0 3px rgba(10,22,40,0.08); }
+    textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+    select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    .warn-note {
+      background: #FEF3C7;
+      border: 1px solid #FDE68A;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      color: #92400E;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .confirm-btn {
+      width: 100%;
+      background: #0A1628;
+      color: #fff;
+      font-size: 0.97rem;
+      font-weight: 700;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .confirm-btn:hover { background: #1B3A5C; }
+    .confirm-btn:active { transform: scale(0.99); }
+    .confirm-btn:disabled { background: #9CA3AF; cursor: not-allowed; }
+
+    /* SUCCESS STATE */
+    .success-card {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 48px 36px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      display: none;
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      background: #DCFCE7;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2rem;
+    }
+    .success-card h2 { font-size: 1.25rem; font-weight: 800; color: #111827; margin-bottom: 12px; }
+    .success-card p { font-size: 0.9rem; color: #4B5563; line-height: 1.75; margin-bottom: 10px; }
+
+    .timeline-box {
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 20px 0 28px;
+      text-align: left;
+    }
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.85rem;
+    }
+    .timeline-row:last-child { border-bottom: none; }
+    .timeline-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #D1D5DB; flex-shrink: 0;
+    }
+    .timeline-dot.active { background: #16A34A; }
+    .timeline-text { color: #4B5563; }
+    .timeline-text strong { color: #111827; }
+
+    .back-btn {
+      display: inline-block;
+      background: #F3F4F6;
+      color: #374151;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 11px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .back-btn:hover { background: #E5E7EB; }
+
+    .footer { background: #060D1A; color: rgba(255,255,255,0.4); text-align: center; padding: 20px 24px; font-size: 0.75rem; }
+
+    @media (max-width: 480px) {
+      .card, .success-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <a href="members.html" class="header__logo">IA <em>Tools</em></a>
+  <a href="members.html" class="header__back">← Back to Members Area</a>
+</header>
+
+<div class="main">
+
+  <!-- FORM STATE -->
+  <div class="card" id="form-card">
+    <div class="card-icon">↩️</div>
+    <h1>Refund Request</h1>
+    <p class="subtitle">Fill in the details below to submit your refund request. All requests are reviewed manually and handled fairly.</p>
+
+    <!-- PRODUCT -->
+    <div class="product-box">
+      <div class="product-info">
+        <div class="product-icon">🔐</div>
+        <div>
+          <div class="product-name">CaptchaMola</div>
+          <div class="product-type">Digital product · One-time purchase</div>
+        </div>
+      </div>
+      <div class="product-price">R197</div>
+    </div>
+
+    <!-- REASON SELECT -->
+    <div class="form-group">
+      <label for="reason-select">Reason for refund request</label>
+      <select id="reason-select">
+        <option value="" disabled selected>Select a reason…</option>
+        <option value="no_access">I was unable to access the product after purchase</option>
+        <option value="charged_twice">I was charged more than once by mistake</option>
+        <option value="not_as_described">The product was not as described</option>
+        <option value="technical">Technical issue that could not be resolved</option>
+        <option value="changed_mind">I changed my mind</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <!-- DETAIL -->
+    <div class="form-group">
+      <label for="reason-detail">Describe your situation <span style="color:#9CA3AF;font-weight:400">(optional)</span></label>
+      <textarea id="reason-detail" placeholder="Provide any additional details that may help us process your request…"></textarea>
+    </div>
+
+    <!-- ORDER -->
+    <div class="form-group">
+      <label for="order-ref">Order / transaction reference <span style="color:#9CA3AF;font-weight:400">(optional)</span></label>
+      <select id="order-ref" style="display:none"></select>
+      <input type="text" id="order-ref-input" placeholder="e.g. ORD-00123456"
+        style="width:100%;border:1px solid #D1D5DB;border-radius:8px;padding:11px 14px;font-size:0.9rem;font-family:Inter,sans-serif;color:#111827;outline:none;transition:border-color 0.2s;"
+        onfocus="this.style.borderColor='#0A1628'" onblur="this.style.borderColor='#D1D5DB'" />
+    </div>
+
+    <div class="warn-note">
+      ⚠️ Refund requests are only considered within <strong>7 days</strong> of purchase and if the content has not been fully accessed. Please review our <a href="refund-policy.html" style="color:#92400E;">Refund Policy</a> before submitting.
+    </div>
+
+    <button class="confirm-btn" id="submit-btn" onclick="submitRequest()">Confirm Refund Request</button>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div class="success-card" id="success-card">
+    <div class="success-icon">✅</div>
+    <h2>Request Submitted</h2>
+    <p>Your refund request for <strong>CaptchaMola (R197)</strong> has been received. Our team will review it and get back to you by email.</p>
+
+    <div class="timeline-box">
+      <div class="timeline-row">
+        <div class="timeline-dot active"></div>
+        <div class="timeline-text"><strong>Request received</strong> — confirmed immediately</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-dot"></div>
+        <div class="timeline-text"><strong>Review</strong> — within 1 week our team analyses your case</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-dot"></div>
+        <div class="timeline-text"><strong>Processing</strong> — if approved, refund processed in <strong>2–3 months</strong> depending on your payment provider</div>
+      </div>
+      <div class="timeline-row">
+        <div class="timeline-dot"></div>
+        <div class="timeline-text"><strong>Confirmation</strong> — you will be notified by email at each step</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.82rem;color:#9CA3AF;">Questions? Contact us at <a href="mailto:ferramentasvsl@gmail.com" style="color:#16A34A;">ferramentasvsl@gmail.com</a></p>
+
+    <br>
+    <a href="members.html" class="back-btn">← Back to Members Area</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  &copy; 2024 IA Tools · Producer: Kwame Obeng
+</div>
+
+<script>
+  function submitRequest() {
+    const reason = document.getElementById('reason-select').value;
+    if (!reason) {
+      document.getElementById('reason-select').style.borderColor = '#EF4444';
+      document.getElementById('reason-select').focus();
+      return;
+    }
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    setTimeout(() => {
+      document.getElementById('form-card').style.display = 'none';
+      document.getElementById('success-card').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 900);
+  }
+</script>
+
+</body>
+</html>
