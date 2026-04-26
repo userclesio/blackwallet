@@ -359,7 +359,7 @@
 <!-- AUTH GATE -->
 <script>
   (function () {
-    if (sessionStorage.getItem('gib_logged_in') !== 'true') {
+    if (sessionStorage.getItem('gib_logged_in') !== 'true' && localStorage.getItem('gib_logged_in') !== 'true') {
       window.location.href = 'login.html';
     }
   })();
@@ -687,7 +687,7 @@ let botTyping = false;
 //  INIT
 // ============================================================
 document.addEventListener('DOMContentLoaded', function () {
-  const email = sessionStorage.getItem('gib_user_email') || '';
+  const email = sessionStorage.getItem('gib_user_email') || localStorage.getItem('gib_user_email') || '';
   document.getElementById('userEmailBadge').textContent = email;
 
   updateProgress();
@@ -836,6 +836,8 @@ function closeSidebar() {
 // ============================================================
 function doLogout() {
   sessionStorage.clear();
+  localStorage.removeItem('gib_logged_in');
+  localStorage.removeItem('gib_user_email');
   window.location.href = 'login.html';
 }
 
