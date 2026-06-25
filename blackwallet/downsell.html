@@ -169,6 +169,13 @@
     .price-includes li.not-included { color: rgba(255,255,255,0.28); text-decoration: line-through; }
     .price-includes li.not-included::before { background: rgba(255,255,255,0.1); content: '✕'; }
 
+    /* CTA BUTTONS */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
     .cta-btn {
       display: block; width: 100%;
       background: linear-gradient(135deg, #16A34A, #15803D);
@@ -177,10 +184,28 @@
       text-decoration: none; text-align: center;
       box-shadow: 0 6px 24px rgba(22,163,74,0.35);
       transition: transform 0.15s, box-shadow 0.15s;
-      margin-bottom: 14px; letter-spacing: 0.02em;
+      letter-spacing: 0.02em;
+      border: none; cursor: pointer;
     }
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(22,163,74,0.45); }
     .cta-btn small { display: block; font-size: 0.73rem; font-weight: 500; opacity: 0.82; margin-top: 3px; }
+
+    .no-btn {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: rgba(255,255,255,0.28);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 13px 24px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      text-decoration: none;
+    }
+    .no-btn:hover { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.22); }
 
     .guarantee {
       display: flex; align-items: center; gap: 12px;
@@ -190,13 +215,6 @@
     .guarantee-icon { font-size: 1.8rem; flex-shrink: 0; }
     .guarantee p { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
     .guarantee strong { color: #fff; }
-
-    .no-thanks {
-      display: block; text-align: center;
-      font-size: 0.78rem; color: rgba(255,255,255,0.25);
-      text-decoration: underline; margin-top: 14px; cursor: pointer;
-    }
-    .no-thanks:hover { color: rgba(255,255,255,0.55); }
 
     .footer { background: #020609; padding: 24px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer p { font-size: 0.73rem; color: rgba(255,255,255,0.28); line-height: 1.8; }
@@ -219,9 +237,9 @@
 <!-- HERO -->
 <div class="hero">
   <div class="wait-tag">Last Chance Offer</div>
-  <h1>OK — You Don't Need The Full Version.<br>But You Still Need <em>Your Money Out Of The Bank Queue.</em></h1>
+  <h1>OK — You Don't Need The Full Version.<br>But You Still Need <em>Your Money In Your Account.</em></h1>
   <p class="hero-sub">
-    We get it — maybe the full Black Wallet isn't for you right now. So we stripped it down to the one thing that matters most: <strong>getting your earnings into your bank account without waiting 3 months for an income contract.</strong>
+    We get it — maybe the full Black Wallet isn't for you right now. So we stripped it down to the one thing that matters most: <strong>getting your earnings into your M-Pesa or bank account without delays, limits, or documentation requests.</strong>
   </p>
 </div>
 
@@ -230,21 +248,21 @@
   <div class="container">
     <div class="section-label">What's Included</div>
     <h2 class="section-title">Essential vs <em>Full Version</em></h2>
-    <p class="section-desc">Black Wallet Essential gives you the core — the bank transfer pathway — at a lower price. No extras, just what you actually need first.</p>
+    <p class="section-desc">Black Wallet Essential gives you the core — the direct payment pathway to M-Pesa and your bank — at a lower price. No extras, just what you actually need first.</p>
 
     <div class="compare">
       <div class="compare-header">
         <div style="text-align:left">Feature</div>
-        <div class="col-full">Full (R167)</div>
-        <div class="col-essential">Essential (R97)</div>
+        <div class="col-full">Full (KSh 777)</div>
+        <div class="col-essential">Essential (KSh 397)</div>
       </div>
       <div class="compare-row">
-        <div class="col-feature">Direct bank withdrawal (all SA banks)</div>
+        <div class="col-feature">Direct M-Pesa & bank withdrawal</div>
         <div class="col-full check">✓</div>
         <div class="col-essential check">✓</div>
       </div>
       <div class="compare-row">
-        <div class="col-feature">Bypasses income contract requirement</div>
+        <div class="col-feature">Bypasses source-of-funds checks</div>
         <div class="col-full check">✓</div>
         <div class="col-essential check">✓</div>
       </div>
@@ -282,8 +300,8 @@
       <div class="benefit">
         <div class="benefit-icon">⚡</div>
         <div class="benefit-text">
-          <h3>Skip the 3-Month Income Contract Queue</h3>
-          <p>This alone is worth every cent. Instead of waiting months for your bank to approve an income contract, your earnings move through the wallet and land in your account fast.</p>
+          <h3>Skip the Bank & M-Pesa Delays</h3>
+          <p>This alone is worth every shilling. Instead of waiting days for your bank to release online income or hitting M-Pesa limits, your earnings move through the wallet and land in your account fast.</p>
         </div>
       </div>
       <div class="benefit">
@@ -294,10 +312,10 @@
         </div>
       </div>
       <div class="benefit">
-        <div class="benefit-icon">🏦</div>
+        <div class="benefit-icon">📱</div>
         <div class="benefit-text">
-          <h3>Withdraw Directly to Your SA Bank</h3>
-          <p>Capitec, FNB, Standard Bank, Absa, Nedbank, TymeBank — your money arrives clean, without triggering compliance flags or document requests.</p>
+          <h3>Withdraw to M-Pesa or Your Kenyan Bank</h3>
+          <p>M-Pesa, Equity Bank, KCB, Co-op Bank, NCBA, Absa Kenya — your money arrives clean, without triggering compliance flags or documentation requests.</p>
         </div>
       </div>
     </div>
@@ -313,44 +331,33 @@
 
     <div class="price-box">
       <div class="price-tag">⏳ One-Time Offer — Won't Appear Again</div>
-      <div class="price-original">Full version: R167</div>
-      <div class="price-main"><span>R</span>97</div>
+      <div class="price-original">Full version: KSh 777</div>
+      <div class="price-main"><span>KSh </span>397</div>
       <div class="price-note">One-time payment · Lifetime access · No subscriptions</div>
 
       <ul class="price-includes">
         <li>Earnings wallet — receive &amp; store your income</li>
-        <li>Bypass the bank income contract delay</li>
-        <li>Direct withdrawal to any SA bank account</li>
+        <li>Bypass bank &amp; M-Pesa transfer delays</li>
+        <li>Direct withdrawal to M-Pesa or any Kenyan bank</li>
         <li class="not-included">Cash flow dashboard &amp; tracker</li>
         <li class="not-included">Reinvestment planner</li>
         <li class="not-included">Priority email support</li>
       </ul>
 
-      <!-- CashPay Upsell: Blackwallet -->
-      <div id="cashpay-upsell-fc02219c-abfc-4870-aed9-2932926692d2"></div>
-      <script>
-      (function() {
-        var params = new URLSearchParams(window.location.search);
-        var txId = params.get('cashpay_tx') || window.cashpayTxId || '';
-        var linkId = params.get('cashpay_link') || window.cashpayLinkId || '';
-        var c = document.getElementById('cashpay-upsell-fc02219c-abfc-4870-aed9-2932926692d2');
-        var f = document.createElement('iframe');
-        f.src = 'https://opinamoneyfrica.online/upsell/fc02219c-abfc-4870-aed9-2932926692d2?embed=true&tx=' + txId + '&link=' + linkId;
-        f.style.cssText = 'width:100%;border:none;min-height:600px;border-radius:16px;overflow:hidden';
-        c.appendChild(f);
-        window.addEventListener('message', function(e) {
-          if (e.data && e.data.type === 'cashpay-resize') f.style.height = e.data.height + 'px';
-          if (e.data && e.data.type === 'cashpay-redirect') window.location.href = e.data.url;
-        });
-      })();
-      </script>
+      <div class="btn-group">
+        <a href="https://selar.com/288722gt28" class="cta-btn">
+          Yes! Give Me Access for KSh 397
+          <small>Get my money moving — one-time payment only</small>
+        </a>
+        <a href="../thank-you.html" class="no-btn">
+          No, I'll deal with the bank delays on my own
+        </a>
+      </div>
 
       <div class="guarantee">
         <div class="guarantee-icon">🔒</div>
         <p><strong>100% Secure Purchase.</strong> Payment processed securely. Access granted instantly after confirmation.</p>
       </div>
-
-      <a href="../thank-you.html" class="no-thanks">No thanks — I'll deal with the bank income contract on my own</a>
     </div>
   </div>
 </div>
@@ -359,7 +366,7 @@
 <div class="footer">
   <p>
     &copy; 2024 Black Wallet · A digital product by Kwame Obeng<br>
-    This product is not affiliated with any bank or financial institution.<br>
+    This product is not affiliated with M-Pesa, any bank, or financial institution.<br>
     Results vary based on individual effort and application of the strategies.
   </p>
   <p style="margin-top:10px;">

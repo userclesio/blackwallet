@@ -279,6 +279,13 @@
       font-weight: 900;
     }
 
+    /* CTA BUTTONS */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
     .cta-btn {
       display: block;
       width: 100%;
@@ -293,21 +300,28 @@
       letter-spacing: 0.02em;
       box-shadow: 0 6px 24px rgba(22,163,74,0.4);
       transition: transform 0.15s, box-shadow 0.15s;
-      margin-bottom: 16px;
+      border: none;
+      cursor: pointer;
     }
     .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(22,163,74,0.5); }
     .cta-btn small { display: block; font-size: 0.75rem; font-weight: 500; opacity: 0.85; margin-top: 3px; }
 
-    .no-thanks {
+    .no-btn {
       display: block;
+      width: 100%;
+      background: transparent;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 10px;
       text-align: center;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.3);
-      text-decoration: underline;
+      border: 1px solid rgba(255,255,255,0.12);
       cursor: pointer;
-      margin-top: 12px;
+      transition: color 0.15s, border-color 0.15s;
+      text-decoration: none;
     }
-    .no-thanks:hover { color: rgba(255,255,255,0.6); }
+    .no-btn:hover { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.25); }
 
     .guarantee {
       display: flex;
@@ -363,13 +377,144 @@
       font-weight: 600;
     }
 
+    /* POPUP OVERLAY */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .popup-overlay.active { display: flex; }
+    .popup-box {
+      background: linear-gradient(135deg, #0D1F3C, #0A1628);
+      border: 2px solid #F59E0B;
+      border-radius: 20px;
+      padding: 40px 32px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      animation: popup-in 0.25s ease;
+    }
+    @keyframes popup-in { from { opacity:0; transform:scale(0.92) } to { opacity:1; transform:scale(1) } }
+    .popup-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #F59E0B, #FCD34D, #F59E0B);
+      border-radius: 20px 20px 0 0;
+    }
+    .popup-close {
+      position: absolute; top: 14px; right: 18px;
+      background: none; border: none; color: rgba(255,255,255,0.35);
+      font-size: 1.4rem; cursor: pointer; line-height: 1;
+    }
+    .popup-close:hover { color: rgba(255,255,255,0.7); }
+    .popup-badge {
+      display: inline-block;
+      background: #B91C1C;
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .popup-box h2 {
+      font-size: clamp(1.3rem, 4vw, 1.7rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+    .popup-box h2 em { color: #F59E0B; font-style: normal; }
+    .popup-box p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .popup-price-old {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.35);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .popup-price {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #F59E0B;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .popup-price span { font-size: 1.5rem; vertical-align: super; }
+    .popup-price-note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+    .popup-cta {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #16A34A, #15803D);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 16px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(22,163,74,0.4);
+      margin-bottom: 10px;
+      transition: transform 0.15s;
+    }
+    .popup-cta:hover { transform: translateY(-2px); }
+    .popup-cta small { display: block; font-size: 0.72rem; font-weight: 500; opacity: 0.82; margin-top: 3px; }
+    .popup-no {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.28);
+      cursor: pointer;
+      text-decoration: underline;
+      background: none;
+      border: none;
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 8px 0;
+    }
+    .popup-no:hover { color: rgba(255,255,255,0.55); }
+
     @media (max-width: 480px) {
       .price-box { padding: 28px 20px; }
       .hero { padding: 44px 16px 40px; }
+      .popup-box { padding: 32px 20px; }
     }
   </style>
 </head>
 <body>
+
+<!-- DISCOUNT POPUP -->
+<div class="popup-overlay" id="discountPopup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()">×</button>
+    <div class="popup-badge">⚡ Special Discount — Just For You</div>
+    <h2>Wait! Get Black Wallet Essential<br>for Only <em>KSh 397</em></h2>
+    <p>You don't have to pay the full price. Get the core access — skip the bank delays, receive your money via M-Pesa or bank transfer — at a lower price. This discount disappears when you close this popup.</p>
+    <div class="popup-price-old">Normal: KSh 777</div>
+    <div class="popup-price"><span>KSh </span>397</div>
+    <div class="popup-price-note">One-time payment · No subscriptions · Instant access</div>
+    <a href="https://selar.com/288722gt28" class="popup-cta">
+      Yes! I Want This Discount
+      <small>Grab KSh 397 access before it's gone</small>
+    </a>
+    <a href="https://ponteselatest21.vercel.app/ty.html?id=pg-1m568y&h=Thank+you+for+your+purchase&sub=Get+your+access+by+clicking+the+button+below&btn=ACCESS++HERE&link=https%3A%2F%2Fapi.whatsapp.com%2Fsend%3Fphone%3D258867130294%26text%3DI%2520want%2520the%2520System&color=%234361ee&pid=pg-1m568y&pname=google+tool&price=1000&xtoken=VDZRSW5YVHNkM202dFN4elFpd3B3U1Z6NWNya0M4S3NHS3pV" class="popup-no">No thanks, I don't need my money fast</a>
+  </div>
+</div>
 
 <!-- ALERT BAR -->
 <div class="alert-bar">
@@ -379,16 +524,16 @@
 <!-- HERO -->
 <div class="hero">
   <div class="wait-tag">Exclusive One-Time Offer</div>
-  <h1>Your Money Is Being Earned.<br>But Without This, <em>You Can't Touch It</em> For <span>Up To 3 Months.</span></h1>
+  <h1>Your Money Is Being Earned.<br>But Without This, <em>You Can't Access It</em> For <span>Weeks.</span></h1>
   <p class="hero-sub">
-    Most people only find out <strong>after they start earning</strong> — their bank blocks the transfer and demands an official income contract. Without Black Wallet, your money sits locked. <strong>With it, it goes straight to your account.</strong>
+    Most people only find out <strong>after they start earning</strong> — their bank blocks the transfer or M-Pesa limits kick in before they can touch a single shilling. Without Black Wallet, your money sits locked. <strong>With it, it flows straight to you.</strong>
   </p>
 
   <div class="wallet-visual">
     <div class="wallet-box">
       <div class="wallet-logo">BLACK <span>WALLET</span></div>
       <div class="wallet-chip"></div>
-      <div class="wallet-amount">Available Balance<strong>R0.00 → R∞</strong></div>
+      <div class="wallet-amount">Available Balance<strong>KSh 0 → KSh ∞</strong></div>
     </div>
   </div>
 </div>
@@ -402,12 +547,12 @@
 <div class="section section--dark">
   <div class="container">
     <div class="section-label">What Nobody Warns You About</div>
-    <h2 class="section-title">The Bank Problem That <em>Blocks Your Money</em></h2>
-    <p class="section-desc">You earn the money. It's yours. But without the right structure, your bank won't release it — and the process to unlock it takes months.</p>
+    <h2 class="section-title">The Problem That <em>Blocks Your Money</em></h2>
+    <p class="section-desc">You earn the money. It's yours. But without the right structure, your bank or M-Pesa won't release it — and the process to unlock it takes weeks.</p>
 
     <div class="problem-box">
-      <p>❌ <strong>South African banks flag online income as "unverified earnings"</strong> — and immediately freeze or delay the transfer until you prove the source.</p>
-      <p>❌ <strong>They demand an income contract (proof of income)</strong> — a formal document showing you have a recognised, structured income source. Getting this approved takes an average of <strong>3 months</strong>.</p>
+      <p>❌ <strong>Kenyan banks flag online income as "unverified funds"</strong> — and immediately hold or delay the transfer until you prove the source of the money.</p>
+      <p>❌ <strong>M-Pesa has transaction and daily limits</strong> — if your earnings exceed them, your money gets stuck in your wallet with no fast way to access it.</p>
       <p>❌ While you wait, your money sits in limbo. You can't spend it. You can't reinvest it. You can't access it at all.</p>
       <p>❌ Most people give up during this period — not because they stopped earning, but because they <strong>couldn't get to their own money.</strong></p>
     </div>
@@ -419,28 +564,28 @@
   <div class="container">
     <div class="section-label">The Solution</div>
     <h2 class="section-title">Introducing <em>Black Wallet</em> —<br>Your Money Moves. Fast.</h2>
-    <p class="section-desc">Black Wallet is the digital bridge between your online earnings and your bank account. Your money flows in, gets organised, and lands in your account — without bureaucracy, without delays, without an income contract.</p>
+    <p class="section-desc">Black Wallet is the digital bridge between your online earnings and your account. Your money flows in, gets organised, and lands in your M-Pesa or bank account — without bureaucracy, without delays, without frozen transfers.</p>
 
     <div class="benefits">
       <div class="benefit">
         <div class="benefit-icon">⚡</div>
         <div class="benefit-text">
-          <h3>Skip the 3-Month Bank Queue</h3>
+          <h3>Skip the Bank Queue Completely</h3>
           <p>Black Wallet is a recognised digital wallet. Your earnings land here first — clean, structured, and ready to transfer — without triggering bank compliance flags.</p>
         </div>
       </div>
       <div class="benefit">
-        <div class="benefit-icon">📄</div>
+        <div class="benefit-icon">📱</div>
         <div class="benefit-text">
-          <h3>No Income Contract Required</h3>
-          <p>Banks demand income contracts when money arrives from unstructured sources. Black Wallet acts as that structure — so your bank accepts the transfer without extra documentation.</p>
+          <h3>Works With M-Pesa & All Major Banks</h3>
+          <p>Withdraw directly to M-Pesa, Equity Bank, KCB, Co-op Bank, NCBA, Absa Kenya, or any major Kenyan bank — instantly, without documentation requests.</p>
         </div>
       </div>
       <div class="benefit">
         <div class="benefit-icon">🏦</div>
         <div class="benefit-text">
-          <h3>Direct Withdrawal to Your SA Bank</h3>
-          <p>Withdraw your balance directly to Capitec, FNB, Standard Bank, Absa, Nedbank or TymeBank — quickly, cleanly, and without any stress.</p>
+          <h3>No Source-of-Funds Verification</h3>
+          <p>Banks demand proof when money arrives from online platforms they don't recognise. Black Wallet acts as that structured source — so transfers arrive clean and accepted.</p>
         </div>
       </div>
       <div class="benefit">
@@ -465,29 +610,29 @@
 <div class="section section--dark">
   <div class="container">
     <div class="section-label">How It Works</div>
-    <h2 class="section-title">Earn → Wallet → <em>Bank Account.</em></h2>
-    <p class="section-desc">Three steps. No delays. No blocked transfers. No income contract headaches.</p>
+    <h2 class="section-title">Earn → Wallet → <em>M-Pesa / Bank.</em></h2>
+    <p class="section-desc">Three steps. No delays. No blocked transfers. No verification headaches.</p>
 
     <div class="steps">
       <div class="step-row">
         <div class="step-num">1</div>
         <div class="step-content">
           <h3>You Earn</h3>
-          <p>You complete your online tasks and generate income. Every rand you earn is directed into your Black Wallet — automatically collected in one place.</p>
+          <p>You complete your online tasks and generate income. Every shilling you earn is directed into your Black Wallet — automatically collected in one place.</p>
         </div>
       </div>
       <div class="step-row">
         <div class="step-num">2</div>
         <div class="step-content">
           <h3>It Lands in Your Black Wallet</h3>
-          <p>Your money sits safely in your wallet, visible on your dashboard. No bank flags. No income contract requests. No waiting 3 months for compliance approval.</p>
+          <p>Your money sits safely in your wallet, visible on your dashboard. No bank flags. No frozen transfers. No waiting weeks for compliance approval.</p>
         </div>
       </div>
       <div class="step-row">
         <div class="step-num">3</div>
         <div class="step-content">
-          <h3>You Withdraw to Your Bank Account</h3>
-          <p>When you're ready, you request a withdrawal. The money transfers directly to your South African bank account. Fast, clean, and simple.</p>
+          <h3>You Withdraw to M-Pesa or Your Bank</h3>
+          <p>When you're ready, you request a withdrawal. The money transfers directly to your M-Pesa or Kenyan bank account. Fast, clean, and simple.</p>
         </div>
       </div>
     </div>
@@ -503,41 +648,41 @@
     <div class="testimonials">
       <div class="testi">
         <div class="testi-header">
-          <div class="testi-avatar">T</div>
+          <div class="testi-avatar">B</div>
           <div>
-            <div class="testi-name">Thabo Dlamini</div>
-            <div class="testi-location">Johannesburg, GP</div>
+            <div class="testi-name">Brian Otieno</div>
+            <div class="testi-location">Nairobi, Nairobi County</div>
           </div>
           <div class="testi-stars" style="margin-left:auto">★★★★★</div>
         </div>
-        <p>"My FNB account blocked the first transfer I tried to make. They said I needed to prove the source of income with an official contract. I didn't know that. Black Wallet solved this — my next withdrawal went straight through, no questions asked."</p>
-        <span class="testi-amount">Withdrew R2,400 in 24 hours</span>
+        <p>"My Equity Bank account flagged the first transfer I tried to receive. They said they needed to verify the source of the funds. I had no idea this would happen. Black Wallet fixed this — my next withdrawal came through instantly, no questions asked."</p>
+        <span class="testi-amount">Withdrew KSh 8,500 in 24 hours</span>
       </div>
 
       <div class="testi">
         <div class="testi-header">
-          <div class="testi-avatar">N</div>
+          <div class="testi-avatar">F</div>
           <div>
-            <div class="testi-name">Nomvula Sithole</div>
-            <div class="testi-location">Durban, KZN</div>
+            <div class="testi-name">Faith Wanjiku</div>
+            <div class="testi-location">Mombasa, Coast Region</div>
           </div>
           <div class="testi-stars" style="margin-left:auto">★★★★★</div>
         </div>
-        <p>"I almost gave up. I had earned over R3,000 but couldn't access it because Capitec kept asking for documents I didn't have. A friend told me about Black Wallet. Within 48 hours my money was in my account. I wish I knew about this from day one."</p>
-        <span class="testi-amount">R3,200 unlocked in 48 hours</span>
+        <p>"I almost gave up. I had earned over KSh 12,000 but my M-Pesa limit was blocking everything and my bank kept asking for documents I didn't have. A friend told me about Black Wallet. Within 48 hours my money was in my account. I wish I knew about this from day one."</p>
+        <span class="testi-amount">KSh 12,000 unlocked in 48 hours</span>
       </div>
 
       <div class="testi">
         <div class="testi-header">
           <div class="testi-avatar">K</div>
           <div>
-            <div class="testi-name">Kagiso Mohlala</div>
-            <div class="testi-location">Pretoria, GP</div>
+            <div class="testi-name">Kevin Mutua</div>
+            <div class="testi-location">Kisumu, Nyanza Region</div>
           </div>
           <div class="testi-stars" style="margin-left:auto">★★★★★</div>
         </div>
-        <p>"The income contract process with my bank took 11 weeks. During that time I couldn't touch my earnings. With Black Wallet I never deal with that again. The money goes: earned → wallet → my account. That's it."</p>
-        <span class="testi-amount">Saved 3 months of waiting</span>
+        <p>"KCB held my transfer for weeks. During that time I couldn't touch my earnings. With Black Wallet I never deal with that again. The money goes: earned → wallet → my account. That's it. Simple and fast."</p>
+        <span class="testi-amount">Saved weeks of waiting</span>
       </div>
     </div>
   </div>
@@ -547,49 +692,38 @@
 <div class="section section--dark">
   <div class="container">
     <div class="section-label">One-Time Offer — Today Only</div>
-    <h2 class="section-title">Don't Let Your Money <em>Sit Blocked</em> For 3 Months</h2>
-    <p class="section-desc">R167 once. Your earnings flow to your bank account without delays, without income contracts, without bank compliance headaches. Forever.</p>
+    <h2 class="section-title">Don't Let Your Money <em>Sit Blocked</em> While You Wait</h2>
+    <p class="section-desc">KSh 777 once. Your earnings flow to your M-Pesa or bank account without delays, without source-of-funds requests, without compliance headaches. Forever.</p>
 
     <div class="price-box">
       <div class="price-tag">⚡ Limited Offer — This Page Only</div>
-      <div class="price-original">Normal price: R497</div>
-      <div class="price-main"><span>R</span>167</div>
+      <div class="price-original">Normal price: KSh 1,499</div>
+      <div class="price-main"><span>KSh </span>777</div>
       <div class="price-note">One-time payment · No subscriptions · No hidden fees</div>
 
       <ul class="price-includes">
         <li>Full Black Wallet — lifetime access</li>
-        <li>Bypass the 3-month bank income contract delay</li>
-        <li>Direct withdrawal to any SA bank account</li>
+        <li>Bypass bank source-of-funds delays instantly</li>
+        <li>Withdraw to M-Pesa, Equity, KCB, Co-op, NCBA & more</li>
         <li>Cash flow dashboard &amp; earnings tracker</li>
-        <li>Structured wallet accepted by all major SA banks</li>
+        <li>Structured wallet accepted by all major Kenyan banks</li>
         <li>Priority support via email</li>
       </ul>
 
-      <!-- CashPay Upsell: Blackwallet -->
-      <div id="cashpay-upsell-fc02219c-abfc-4870-aed9-2932926692d2"></div>
-      <script>
-      (function() {
-        var params = new URLSearchParams(window.location.search);
-        var txId = params.get('cashpay_tx') || window.cashpayTxId || '';
-        var linkId = params.get('cashpay_link') || window.cashpayLinkId || '';
-        var c = document.getElementById('cashpay-upsell-fc02219c-abfc-4870-aed9-2932926692d2');
-        var f = document.createElement('iframe');
-        f.src = 'https://opinamoneyfrica.online/upsell/fc02219c-abfc-4870-aed9-2932926692d2?embed=true&tx=' + txId + '&link=' + linkId;
-        f.style.cssText = 'width:100%;border:none;min-height:600px;border-radius:16px;overflow:hidden';
-        c.appendChild(f);
-        window.addEventListener('message', function(e) {
-          if (e.data && e.data.type === 'cashpay-resize') f.style.height = e.data.height + 'px';
-          if (e.data && e.data.type === 'cashpay-redirect') window.location.href = e.data.url;
-        });
-      })();
-      </script>
+      <div class="btn-group">
+        <a href="https://selar.com/1k41zg7541" class="cta-btn">
+          Yes! I Want My Money in My Account Fast
+          <small>Secure my Black Wallet for KSh 777 — one time only</small>
+        </a>
+        <button class="no-btn" onclick="openPopup()">
+          No, I'll keep waiting and risk losing access to my earnings
+        </button>
+      </div>
 
       <div class="guarantee">
         <div class="guarantee-icon">🔒</div>
         <p><strong>100% Secure Purchase.</strong> Your payment is processed securely. Access granted instantly. No risk, no commitments.</p>
       </div>
-
-      <a href="downsell.html" class="no-thanks">No thanks — I'll wait 3 months for my bank to release my money</a>
     </div>
   </div>
 </div>
@@ -603,19 +737,19 @@
     <div class="faq">
       <div class="faq-item">
         <div class="faq-q">Why does the bank block online income transfers?</div>
-        <div class="faq-a">South African banks are required to verify the source of funds under FICA regulations. When they receive income from online platforms they don't recognise, they flag it and request an income contract — a formal proof of income document. This process typically takes 2 to 3 months.</div>
+        <div class="faq-a">Kenyan banks are required to verify the source of funds under CBK (Central Bank of Kenya) regulations. When they receive income from online platforms they don't recognise, they flag it and request source-of-funds documentation — a process that can take weeks.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">How does Black Wallet solve the income contract problem?</div>
-        <div class="faq-a">Black Wallet is a recognised digital wallet platform. Your earnings arrive here first, structured and verified. When you withdraw to your bank account, it arrives as a standard wallet transfer — which banks accept without triggering income contract requirements.</div>
+        <div class="faq-q">How does Black Wallet solve the problem?</div>
+        <div class="faq-a">Black Wallet is a recognised digital wallet platform. Your earnings arrive here first, structured and verified. When you withdraw to your M-Pesa or bank account, it arrives as a standard wallet transfer — which banks and M-Pesa accept without triggering compliance flags.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Which SA banks can I withdraw to?</div>
-        <div class="faq-a">Black Wallet supports all major South African banks: Capitec, FNB, Standard Bank, Absa, Nedbank, and TymeBank.</div>
+        <div class="faq-q">Which Kenyan banks and services can I withdraw to?</div>
+        <div class="faq-a">Black Wallet supports M-Pesa, Equity Bank, KCB, Co-op Bank, NCBA, Absa Kenya, and all major Kenyan banks.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is this a recurring payment?</div>
-        <div class="faq-a">No. R167 is a single one-time payment. You get lifetime access with no monthly fees, ever.</div>
+        <div class="faq-a">No. KSh 777 is a single one-time payment. You get lifetime access with no monthly fees, ever.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How quickly can I access it after payment?</div>
@@ -633,7 +767,7 @@
 <div class="footer">
   <p>
     &copy; 2024 Black Wallet · A digital product by Kwame Obeng · Producer: Kwame Obeng<br>
-    This product is not affiliated with any bank or financial institution.<br>
+    This product is not affiliated with any bank, M-Pesa, or financial institution.<br>
     Results vary based on individual effort, consistency and application of the strategies.
   </p>
   <p style="margin-top:10px;">
@@ -643,6 +777,21 @@
     <a href="../terms-of-use.html">Terms of Use</a>
   </p>
 </div>
+
+<script>
+  function openPopup() {
+    document.getElementById('discountPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePopup() {
+    document.getElementById('discountPopup').classList.remove('active');
+    document.body.style.overflow = '';
+    window.location.href = 'downsell.html';
+  }
+  document.getElementById('discountPopup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+</script>
 
 </body>
 </html>
