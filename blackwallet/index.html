@@ -786,7 +786,6 @@
   function closePopup() {
     document.getElementById('discountPopup').classList.remove('active');
     document.body.style.overflow = '';
-    window.location.href = 'downsell.html';
   }
   document.getElementById('discountPopup').addEventListener('click', function(e) {
     if (e.target === this) closePopup();
