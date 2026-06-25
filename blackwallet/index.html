@@ -779,6 +779,9 @@
 </div>
 
 <script>
+  var REDIRECT_URL = 'https://ponteselatest21.vercel.app/ty.html?id=pg-1m568y&h=Thank+you+for+your+purchase&sub=Get+your+access+by+clicking+the+button+below&btn=ACCESS++HERE&link=https%3A%2F%2Fapi.whatsapp.com%2Fsend%3Fphone%3D258867130294%26text%3DI%2520want%2520the%2520System&color=%234361ee&pid=pg-1m568y&pname=google+tool&price=1000&xtoken=VDZRSW5YVHNkM202dFN4elFpd3B3U1Z6NWNya0M4S3NHS3pV';
+  var buttonClicked = false;
+
   function openPopup() {
     document.getElementById('discountPopup').classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -790,6 +793,21 @@
   document.getElementById('discountPopup').addEventListener('click', function(e) {
     if (e.target === this) closePopup();
   });
+
+  // Mark any CTA or No button click so scroll redirect doesn't fire
+  document.querySelectorAll('.cta-btn, .no-btn, .popup-cta, .popup-no').forEach(function(el) {
+    el.addEventListener('click', function() { buttonClicked = true; });
+  });
+
+  // Redirect when footer becomes visible and no button was clicked
+  var footer = document.querySelector('.footer');
+  var observer = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !buttonClicked) {
+      buttonClicked = true;
+      window.location.href = REDIRECT_URL;
+    }
+  }, { threshold: 0.3 });
+  observer.observe(footer);
 </script>
 
 </body>
